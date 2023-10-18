@@ -51,7 +51,7 @@ for i in range(row_Atoms + 2, row_Atoms + 2 + atom_types):
 
 # matrix_Atomsを表示してみる
 for row in matrix_Atoms:
-    print(row[0])
+    print(row)
 
 output_filename = filename.replace(".lmp", "_1.molfile")
 
