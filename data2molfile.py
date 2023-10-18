@@ -1,5 +1,5 @@
 
-filename = input("何か入力してください: ")
+filename = input("lmpファイル名を入力してください: ")
 
 # ユーザーが入力した値を表示
 print("filename=" + filename)
@@ -51,8 +51,10 @@ for i in range(row_Atoms + 2, row_Atoms + 2 + atom_types):
 
 # matrix_Atomsを表示してみる
 for row in matrix_Atoms:
-    print(row)
+    print(row[0])
 
+
+# molfileを作成する
 output_filename = filename.replace(".lmp", "_1.molfile")
 
 # ファイルを作成して書き込みモードで開く
@@ -90,7 +92,7 @@ with open(output_filename, 'w') as output_file:
         output_file.write(f"{atom_data[0]}\t{atom_data[3]}\n")   
         
         
-# "Atoms"という文字列が現れた行数を取得
+# "Bonds"という文字列が現れた行数を取得
     row_Atoms = 0
     for i, line in enumerate(lines):
         if "Bonds" in line:
@@ -103,3 +105,100 @@ with open(output_filename, 'w') as output_file:
     # ファイルを閉じた後、"filename.molfile" が作成されます
 
 
+# coeffファイルを作成する
+coeff_filename = filename.replace(".lmp", ".setting")
+
+with open(coeff_filename, 'w') as coeff_file:
+    # 1行目に"#filename"を書き込む
+    coeff_file.write("#" + coeff_filename + "\n")
+    coeff_file.write("\n")
+        
+# "Masses"という文字列が現れた行数を取得
+    row_Masses = 0
+    for i, line in enumerate(lines):
+        if "Masses" in line:
+            row_Masses = i   
+    
+
+#massコマンドに変換する
+    for i in range(row_Masses + 2, row_Masses + 2 + atom_types):
+        data = lines[i].strip()
+        modified_line = "mass " + data  # "mass" を挿入
+        coeff_file.write(modified_line + '\n')
+    coeff_file.write("\n") 
+
+# "Pair Coeffs"という文字列が現れた行数を取得
+    row_pair_coeff = 0
+    for i, line in enumerate(lines):
+        if "Pair Coeffs" in line:
+            row_pair_coeff = i   
+    
+
+#pair_coeffコマンドに変換する
+    for i in range(row_pair_coeff + 2, row_pair_coeff + 2 + atom_types):
+        data = lines[i].strip()
+        pair_coeffID = i - row_pair_coeff - 1
+
+        modified_line = "pair_coeff " + str(pair_coeffID) + " " + data  # "pair_coeff" を挿入
+        coeff_file.write(modified_line + '\n')
+    coeff_file.write("\n") 
+
+
+# "Bond Coeffs"という文字列が現れた行数を取得
+    row_bond_coeff = 0
+    for i, line in enumerate(lines):
+        if "Bond Coeffs" in line:
+            row_bond_coeff = i   
+    
+
+#bond_coeffコマンドに変換する
+    for i in range(row_bond_coeff + 2, row_bond_coeff + 2 + bond_types):
+        data = lines[i].strip()
+        modified_line = "bond_coeff " + data  # "bond_coeff" を挿入
+        coeff_file.write(modified_line + '\n')
+    coeff_file.write("\n") 
+
+
+# "Angle Coeffs"という文字列が現れた行数を取得
+    row_angle_coeff = 0
+    for i, line in enumerate(lines):
+        if "Angle Coeffs" in line:
+            row_angle_coeff = i   
+    
+
+#angle_coeffコマンドに変換する
+    for i in range(row_angle_coeff + 2, row_angle_coeff + 2 + angle_types):
+        data = lines[i].strip()
+        modified_line = "angle_coeff " + data  # "bond_coeff" を挿入
+        coeff_file.write(modified_line + '\n')
+    coeff_file.write("\n") 
+
+
+# "Dihedral Coeffs"という文字列が現れた行数を取得
+    row_dihedral_coeff = 0
+    for i, line in enumerate(lines):
+        if "Dihedral Coeffs" in line:
+            row_dihedral_coeff = i   
+    
+
+#dihedral_coeffコマンドに変換する
+    for i in range(row_dihedral_coeff + 2, row_dihedral_coeff + 2 + dihedral_types):
+        data = lines[i].strip()
+        modified_line = "dihedral_coeff " + data  # "bond_coeff" を挿入
+        coeff_file.write(modified_line + '\n')
+    coeff_file.write("\n") 
+
+
+# "Improper Coeffsという文字列が現れた行数を取得
+    row_improper_coeff = 0
+    for i, line in enumerate(lines):
+        if "Improper Coeffs" in line:
+            row_improper_coeff = i   
+    
+
+#improper_coeffコマンドに変換する
+    for i in range(row_improper_coeff + 2, row_improper_coeff + 2 + improper_types):
+        data = lines[i].strip()
+        modified_line = "improper_coeff " + data  # "bond_coeff" を挿入
+        coeff_file.write(modified_line + '\n')
+    coeff_file.write("\n")
