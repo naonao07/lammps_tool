@@ -6,6 +6,8 @@ chunk/atom bun/2dコマンドを使用して作成した密度分布プロファ
 一定間隔で出力された密度分布プロファイルデータをアニメーション化する。
 ![animation](https://github.com/naonao07/lammps_tool/assets/115482247/a152152d-e09b-4b3e-b5d6-12bd64033f54)
 
+元データ
+![untitled (2)](https://github.com/naonao07/lammps_tool/assets/115482247/5301d30b-55de-4d1c-9dfd-70d51c50d863)
 
 ## data2molfile.py ##
 
