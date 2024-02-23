@@ -4,3 +4,4 @@ chunk/atom bun/2dコマンドを使用して作成した密度分布プロファ
 ## data2molfile.py ##
 
 ligpargen で生成されるlammpsファイルをmolfile（トポロジーデータ）とsetting(力場パラメータ等)の２ファイルに変換する。
+![image](https://github.com/naonao07/lammps_tool/assets/115482247/58eec0ae-445c-411b-af90-1b42ca85b21d)
